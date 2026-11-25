@@ -1,313 +1,266 @@
-
 <!doctype html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Palabra del Día</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#164b40">
+<title>Palabra del Día | Mexican Spanish</title>
 <style>
-:root {
-  --green:#164b40;
-  --cream:#f7f3e9;
-  --paper:#fffdf8;
-  --ink:#1d2925;
-  --muted:#68736d;
-}
-* { box-sizing:border-box; }
-body {
-  margin:0;
-  background:var(--cream);
-  color:var(--ink);
-  font-family:system-ui,sans-serif;
-}
-header {
-  background:var(--green);
-  color:white;
-  text-align:center;
-  padding:30px 15px;
-}
-header h1 { margin:8px 0; font-size:32px; }
-header p { margin:0; color:#d5e7df; }
-main { max-width:650px; margin:auto; padding:18px; }
-.panel {
-  background:var(--paper);
-  border-radius:18px;
-  padding:20px;
-  margin-bottom:15px;
-  box-shadow:0 5px 20px #00000010;
-}
-.levels,.stats,.tabs {
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:9px;
-}
-button {
-  cursor:pointer;
-  border:1px solid #ddd;
-  border-radius:11px;
-  padding:13px;
-  background:white;
-  color:var(--ink);
-  font-size:15px;
-  font-weight:650;
-}
-button.active,.primary {
-  background:var(--green);
-  color:white;
-  border-color:var(--green);
-}
-.word {
-  font-size:42px;
-  font-weight:800;
-  color:var(--green);
-  margin:20px 0 3px;
-}
-.muted { color:var(--muted); font-size:14px; }
-.question { font-size:18px; font-weight:700; margin:22px 0 12px; }
-.answers { display:grid; gap:9px; }
-.answer { text-align:left; width:100%; }
-.answer.correct { background:#e3f3e9; border-color:green; }
-.answer.wrong { background:#ffe9e5; border-color:#b44; }
-.feedback {
-  padding:14px;
-  border-radius:12px;
-  margin-top:12px;
-  background:#e3f3e9;
-  line-height:1.5;
-}
-.bad { background:#ffe9e5; }
-.primary { width:100%; margin-top:14px; }
-.stat {
-  background:#f1eee5;
-  padding:14px;
-  border-radius:12px;
-}
-.stat strong { display:block; font-size:25px; color:var(--green); }
-.tabs { grid-template-columns:1fr 1fr; }
-.pile-item {
-  display:flex;
-  justify-content:space-between;
-  padding:12px 0;
-  border-bottom:1px solid #eee;
-  gap:10px;
-}
-footer {
-  text-align:center;
-  padding:20px;
-  color:var(--muted);
-  font-size:12px;
-}
+:root{--green:#164b40;--green2:#216b58;--cream:#f7f3e9;--paper:#fffdf8;--ink:#1d2925;--muted:#68736d;--gold:#e8b85b;--line:#e6e1d5;--red:#a84438}
+*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+header{background:var(--green);color:#fff;text-align:center;padding:23px 16px 25px}header .flag{font-size:25px}header h1{font-size:clamp(28px,8vw,37px);margin:6px 0 2px;letter-spacing:-1px}header p{margin:0;color:#d8e9e2;font-size:13px}
+main{max-width:760px;margin:auto;padding:14px 13px 35px}.panel{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:16px;margin-bottom:12px;box-shadow:0 7px 22px #183b300d}
+.row{display:flex;justify-content:space-between;align-items:center;gap:10px}.muted,.small{color:var(--muted);font-size:12px;line-height:1.45}.eyebrow{font-size:10px;letter-spacing:.1em;font-weight:850;color:var(--muted);text-transform:uppercase}
+button{font:inherit;cursor:pointer;border:1px solid var(--line);border-radius:11px;padding:11px 10px;background:#fff;color:var(--ink);font-weight:700}button:disabled{opacity:.55;cursor:default}
+.primary{width:100%;background:var(--green2);border-color:var(--green2);color:#fff;margin-top:12px;padding:13px}.secondary{background:#fff;color:var(--green);padding:9px 11px;font-size:12px}
+.levels{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}.active{background:var(--green);color:white;border-color:var(--green)}
+.nav{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:12px}.nav button{font-size:12px;padding:11px 5px}.nav button.active{background:var(--green);color:#fff}
+.word{font-size:clamp(35px,9vw,47px);font-weight:850;color:var(--green);letter-spacing:-1px;margin:11px 0 0;overflow-wrap:anywhere}.question{font-size:18px;font-weight:750;margin:19px 0 11px}.answers{display:grid;gap:8px}.answer{text-align:left;width:100%;padding:13px;font-size:14px}.answer.correct{background:#e4f3e9;border-color:#4a9b70;color:#17543f}.answer.wrong{background:#fff0ed;border-color:#c86b5e;color:#8e3027}
+.feedback{padding:12px;border-radius:12px;background:#eaf4ed;margin-top:11px;font-size:14px;line-height:1.5}.feedback.bad{background:#fff0ed}.tip{background:#f5f0df;border-radius:12px;padding:11px;margin-top:11px;font-size:13px;line-height:1.5}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:10px}.stat{background:#f1eee5;border-radius:12px;padding:10px;text-align:center}.stat strong{display:block;color:var(--green);font-size:22px}.stat span{font-size:9px;color:var(--muted);font-weight:850;letter-spacing:.04em}
+.progress{height:9px;background:#e9e5db;border-radius:20px;overflow:hidden;margin-top:8px}.progress div{height:100%;background:var(--green2);width:0;transition:width .2s}
+.tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px}.pile{display:flex;justify-content:space-between;gap:10px;padding:9px 0;border-top:1px solid var(--line);font-size:13px}.pile strong{color:var(--green)}.pile span{text-align:right;color:var(--muted)}
+.hidden{display:none!important}.scenario{background:#f1f5ee;border-radius:13px;padding:13px;line-height:1.5;margin:10px 0}.scenario strong{color:var(--green)}.badge-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}.badge-card{border:1px solid var(--line);border-radius:13px;padding:12px;background:#fff}.badge-card.locked{opacity:.43;filter:grayscale(1)}.badge-card .emoji{font-size:25px}.badge-card b{display:block;font-size:13px;margin-top:4px}.badge-card span{font-size:11px;color:var(--muted)}
+.flashcard{border:2px dashed #b9c8bd;background:#f4f7f1;border-radius:16px;min-height:155px;padding:22px 15px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}.flashcard .front{font-size:32px;font-weight:850;color:var(--green)}.flashcard .back{font-size:18px;font-weight:750;margin-top:12px}
+.switch{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--muted)}.switch input{accent-color:var(--green);width:17px;height:17px}
+#party{display:none;position:fixed;inset:0;background:#164b4030;z-index:10;align-items:center;justify-content:center;pointer-events:none}#party.show{display:flex}.partycard{background:white;border:2px solid var(--gold);border-radius:22px;padding:25px;text-align:center;box-shadow:0 15px 60px #0003;animation:pop .4s}.partycard div{font-size:42px}.partycard h2{color:var(--green);margin:5px}.partycard p{margin:0;color:var(--muted)}
+@keyframes pop{from{transform:scale(.7);opacity:0}to{transform:scale(1);opacity:1}}footer{text-align:center;color:var(--muted);font-size:11px;padding:0 14px 25px}
+@media(min-width:600px){main{padding:20px}.panel{padding:20px}.badge-grid{grid-template-columns:repeat(3,1fr)}}
 </style>
 </head>
 <body>
-
-<header>
-  <div style="font-size:27px">🇲🇽</div>
-  <h1>Palabra del Día</h1>
-  <p>Learn Mexican Spanish one word at a time.</p>
-</header>
-
+<header><div class="flag">🇲🇽</div><h1>Palabra del Día</h1><p>Mexican Spanish, one useful practice at a time.</p></header>
 <main>
 <section class="panel">
-  <strong>Choose your level</strong>
-  <div class="levels" style="margin-top:12px">
-    <button class="active" data-level="easy">Easy</button>
-    <button data-level="medium">Medium</button>
-    <button data-level="pro">Pro</button>
-  </div>
+  <div class="row"><b>Choose your level</b><span class="eyebrow" id="levelName">Easy</span></div>
+  <div class="levels"><button data-level="easy" class="active">Easy</button><button data-level="medium">Medium</button><button data-level="pro">Pro</button></div>
+  <div class="row" style="margin-top:12px"><label class="switch"><input type="checkbox" id="soundToggle" checked> Celebration sound</label><span class="small">Every 10 correct answers 🎉</span></div>
 </section>
+<nav class="nav" aria-label="Learning modes">
+  <button class="active" data-screen="daily">Daily word</button>
+  <button data-screen="real">Real-life Mexico</button>
+  <button data-screen="talk">Conversation</button>
+  <button data-screen="flash">Flashcards</button>
+  <button data-screen="listen">Listen & guess</button>
+  <button data-screen="speak">Pronunciation</button>
+  <button data-screen="badges">Badges</button>
+  <button data-screen="saved">My words</button>
+  <button data-screen="progress">Progress</button>
+</nav>
 
-<section class="panel">
-  <div class="muted" id="wordType">TODAY'S WORD</div>
-  <div class="word" id="word">Hola</div>
-  <div class="muted" id="pronunciation">OH-lah</div>
+<section class="panel screen" id="screen-daily">
+  <div class="row"><span class="eyebrow" id="wordKind">WORD OF THE DAY</span><span class="eyebrow" id="wordMode">New word</span></div>
+  <div class="word" id="word">Hola</div><div class="muted" id="pron">OH-lah</div>
   <div class="question">What does this Spanish word mean?</div>
-  <div class="answers" id="answers"></div>
-  <div id="feedback" aria-live="polite"></div>
-  <button class="primary" id="next" hidden>Next word</button>
+  <div class="answers" id="answers"></div><div id="feedback" aria-live="polite"></div>
+  <button class="primary" id="nextWord" hidden>Next word</button>
+  <div class="tip" id="example">Say the word out loud before choosing your answer.</div>
 </section>
 
-<section class="panel">
-  <strong>Your progress</strong>
-  <div class="stats" style="margin-top:12px;grid-template-columns:1fr 1fr">
-    <div class="stat"><strong id="learned">0</strong><span>Memory pile</span></div>
-    <div class="stat"><strong id="review">0</strong><span>To practise</span></div>
-  </div>
+<section class="panel screen hidden" id="screen-real">
+  <div class="eyebrow">REAL-LIFE MEXICO</div><h2 style="margin:7px 0">What would you say?</h2>
+  <div class="row" style="margin-top:8px"><span class="small">Choose a situation</span><select id="scenarioPick" style="max-width:62%;padding:9px;border-radius:10px;border:1px solid var(--line);background:white"></select></div>
+  <div class="scenario" id="scenarioText"></div><div class="question" id="scenarioQuestion"></div><div class="answers" id="scenarioAnswers"></div><div id="scenarioFeedback" aria-live="polite"></div><button class="primary" id="scenarioNext" hidden>Next situation</button>
 </section>
 
-<section class="panel">
-  <div class="tabs">
-    <button class="active" id="memoryTab">Memory pile</button>
-    <button id="rotationTab">Learning rotation</button>
-  </div>
-  <div id="pile" style="margin-top:12px"></div>
-  <button class="primary" id="practiceMemory">Practise memory pile</button>
+<section class="panel screen hidden" id="screen-talk">
+  <div class="eyebrow">CONVERSATION CHALLENGE</div><h2 style="margin:7px 0">Keep the conversation going</h2>
+  <div class="scenario" id="dialogue"></div><div class="question" id="dialogueQuestion"></div><div class="answers" id="dialogueAnswers"></div><div id="dialogueFeedback" aria-live="polite"></div><button class="primary" id="dialogueNext" hidden>Next conversation</button>
+</section>
+
+<section class="panel screen hidden" id="screen-flash">
+  <div class="eyebrow">FLASHCARD CHALLENGE</div><h2 style="margin:7px 0">Test your memory</h2><p class="small">Think of the meaning, then reveal the answer.</p>
+  <div class="flashcard"><div class="front" id="flashWord">hola</div><div class="muted" id="flashPron">OH-lah</div><div class="back" id="flashAnswer" hidden>hello</div><div class="muted" id="flashExample" hidden></div></div>
+  <button class="primary" id="revealFlash">Reveal meaning</button><div class="row" style="margin-top:9px"><button style="flex:1" id="flashAgain">Need practice</button><button style="flex:1" id="flashKnow">I knew it</button></div><div class="small" id="flashStatus" style="margin-top:9px"></div>
+</section>
+
+<section class="panel screen hidden" id="screen-listen">
+  <div class="eyebrow">LISTEN & GUESS</div><h2 style="margin:7px 0">Hear the Spanish word</h2><p class="small">Tap play, listen to the spoken Spanish word, then choose its meaning. Your device needs Spanish text-to-speech support.</p>
+  <button class="primary" id="playWord">🔊 Play Spanish word</button><div class="question">What does the word mean?</div><div class="answers" id="listenAnswers"></div><div id="listenFeedback" aria-live="polite"></div><button class="primary" id="listenNext" hidden>Next listening word</button>
+</section>
+
+<section class="panel screen hidden" id="screen-speak">
+  <div class="eyebrow">PRONUNCIATION PRACTICE</div><h2 style="margin:7px 0">Say the word out loud</h2><p class="small">This uses your browser's speech recognition when supported. The app compares the words it hears. This is a basic practice aid, not a professional accent assessment.</p>
+  <div class="flashcard"><div class="front" id="speakWord">hola</div><div class="muted" id="speakPron">OH-lah</div><div class="muted" id="speakMeaning">hello</div></div>
+  <button class="primary" id="startSpeech">🎙️ Start speaking</button><div class="feedback" id="speechResult" aria-live="polite">Tap the microphone and say the Spanish word.</div><button class="secondary" id="newSpeak" style="width:100%;margin-top:9px">Try another word</button>
+</section>
+
+<section class="panel screen hidden" id="screen-badges">
+  <div class="eyebrow">YOUR ACHIEVEMENTS</div><h2 style="margin:7px 0">Badges earned</h2><p class="small">Earn achievements as your vocabulary grows.</p><div class="badge-grid" id="badgeGrid"></div>
+</section>
+
+<section class="panel screen hidden" id="screen-saved">
+  <div class="eyebrow">YOUR VOCABULARY</div><h2 style="margin:7px 0">My words</h2><div class="tabs"><button class="active" id="memoryTab">Memory pile</button><button id="rotationTab">Learning rotation</button></div><div id="pileList" style="margin-top:10px"></div><button class="primary" id="practiceMemory">Practise memory pile</button>
+</section>
+
+<section class="panel screen hidden" id="screen-progress">
+  <div class="eyebrow">YOUR LEARNING</div><h2 style="margin:7px 0">Progress dashboard</h2>
+  <div class="stats"><div class="stat"><strong id="totalCorrect">0</strong><span>TOTAL CORRECT</span></div><div class="stat"><strong id="learnedCount">0</strong><span>MEMORY PILE</span></div><div class="stat"><strong id="reviewCount">0</strong><span>TO REVIEW</span></div></div>
+  <div class="stats"><div class="stat"><strong id="streakCount">0</strong><span>DAY STREAK</span></div><div class="stat"><strong id="sessions">0</strong><span>ANSWERS</span></div><div class="stat"><strong id="accuracy">0%</strong><span>ACCURACY</span></div></div>
+  <div class="row" style="margin-top:14px"><span class="small">Progress to next 10-answer celebration</span><b id="milestone">0 / 10</b></div><div class="progress"><div id="progressBar"></div></div>
+  <div class="tip" id="rewardText">Your next celebration is 10 correct answers away.</div>
 </section>
 </main>
-
-<footer>Made for everyday Spanish in Mexico 🇲🇽</footer>
+<div id="party"><div class="partycard"><div>🎉🇲🇽🎉</div><h2>¡Excelente!</h2><p>10 more correct answers. ¡Muy bien!</p></div></div>
+<footer>Mexican expressions vary by region and context. Practise a little every day.</footer>
 
 <script>
-const words = {
-easy: [
-["hola","OH-lah","hello","goodbye","please","thank you"],
-["gracias","GRAH-see-ahs","thank you","hello","goodbye","please"],
-["agua","AH-gwah","water","milk","coffee","bread"],
-["comida","koh-MEE-dah","food","house","street","friend"],
-["casa","KAH-sah","house","car","store","school"],
-["perro","PEH-rroh","dog","cat","bird","horse"],
-["gato","GAH-toh","cat","dog","fish","rabbit"],
-["amigo","ah-MEE-goh","friend","brother","teacher","neighbour"],
-["por favor","por fah-VOR","please","thank you","goodbye","welcome"],
-["buenos días","BWEH-nohs DEE-ahs","good morning","good night","good afternoon","goodbye"],
-["baño","BAH-nyoh","bathroom","kitchen","bedroom","garden"],
-["calle","KAH-yeh","street","beach","market","mountain"],
-["dinero","dee-NEH-roh","money","time","food","ticket"],
-["calor","kah-LOR","heat","cold","rain","wind"],
-["frío","FREE-oh","cold","hot","warm","dry"],
-["desayuno","deh-sah-YOO-noh","breakfast","lunch","dinner","snack"],
-["playa","PLAH-yah","beach","pool","lake","island"],
-["mercado","mehr-KAH-doh","market","airport","restaurant","hotel"]
+const WORDS={
+easy:[
+["hola","OH-lah","hello","goodbye","please","thank you","¡Hola! ¿Cómo estás?"],
+["gracias","GRAH-see-ahs","thank you","hello","goodbye","please","Muchas gracias por tu ayuda."],
+["por favor","por fah-VOR","please","thank you","excuse me","goodbye","Un agua, por favor."],
+["agua","AH-gwah","water","milk","coffee","bread","Quiero un vaso de agua."],
+["comida","koh-MEE-dah","food","house","street","friend","La comida está rica."],
+["casa","KAH-sah","house","car","store","school","Mi casa está cerca."],
+["perro","PEH-rroh","dog","cat","bird","horse","Tengo un perro."],
+["gato","GAH-toh","cat","dog","fish","rabbit","El gato duerme mucho."],
+["amigo","ah-MEE-goh","male friend","brother","teacher","neighbour","Mi amigo vive en México."],
+["amiga","ah-MEE-gah","female friend","mother","daughter","teacher","Mi amiga habla español."],
+["buenos días","BWEH-nohs DEE-ahs","good morning","good night","good afternoon","goodbye","¡Buenos días! ¿Un café?"],
+["buenas tardes","BWEH-nahs TAR-dehs","good afternoon","good morning","good night","see you tomorrow","Buenas tardes, señora."],
+["buenas noches","BWEH-nahs NOH-chehs","good evening / good night","good morning","good afternoon","see you soon","Buenas noches. Hasta mañana."],
+["baño","BAH-nyoh","bathroom","kitchen","bedroom","garden","¿Dónde está el baño?"],
+["calle","KAH-yeh","street","beach","market","mountain","La tienda está en esta calle."],
+["dinero","dee-NEH-roh","money","time","food","ticket","No traigo mucho dinero."],
+["calor","kah-LOR","heat","cold","rain","wind","¡Qué calor hace hoy!"],
+["frío","FREE-oh","cold","hot","warm","dry","Tengo frío."],
+["desayuno","deh-sah-YOO-noh","breakfast","lunch","dinner","snack","El desayuno está listo."],
+["playa","PLAH-yah","beach","pool","lake","island","Vamos a la playa."],
+["mercado","mehr-KAH-doh","market","airport","restaurant","hotel","Compramos fruta en el mercado."],
+["café","kah-FEH","coffee","tea","juice","soda","Quiero un café, por favor."],
+["leche","LEH-cheh","milk","water","cheese","bread","¿Tienes leche?"],
+["pan","pahn","bread","rice","meat","soup","Compré pan fresco."],
+["hoy","oy","today","tomorrow","yesterday","later","Hoy hace sol."],
+["mañana","mah-NYAH-nah","tomorrow / morning","yesterday","tonight","last week","Nos vemos mañana."],
+["ahora","ah-OH-rah","now","later","never","yesterday","Necesito salir ahora."],
+["izquierda","ees-kee-EHR-dah","left","right","straight ahead","behind","Gira a la izquierda."],
+["derecha","deh-REH-chah","right","left","upstairs","outside","La farmacia está a la derecha."],
+["ayuda","ah-YOO-dah","help","money","food","water","¿Me puedes ayudar?"]
 ],
-medium: [
-["ahorita","ah-oh-REE-tah","in a little while or right now","yesterday","next week","never"],
-["mande","MAHN-deh","pardon?","go away","come here","I don't know"],
-["chamba","CHAHM-bah","work or job","party","money","food"],
-["lana","LAH-nah","money","wool","clothes","luck"],
-["órale","OH-rah-leh","wow or okay","sorry","goodbye","quiet"],
-["provecho","proh-BEH-choh","enjoy your meal","good luck","good night","welcome"],
-["¿cuánto cuesta?","KWAN-toh KWEHS-tah","how much does it cost?","where is the bathroom?","what time is it?","where are you from?"],
-["echar la mano","eh-CHAR lah MAH-noh","to give someone a hand","to shake hands","to wave","to lend money"],
-["antojito","ahn-toh-HEE-toh","Mexican snack","dessert menu","spicy sauce","big meal"],
-["sobremesa","soh-breh-MEH-sah","chatting after a meal","a tablecloth","first course","breakfast"],
-["cruda","KROO-dah","hangover","cold weather","raw meat","difficult day"],
-["fresa","FREH-sah","posh or preppy person","strawberry","tired","lucky"],
-["neta","NEH-tah","the truth","a small amount","a promise","a rumour"],
-["chido","CHEE-doh","cool or great","expensive","boring","far away"],
-["camión","kah-mee-OWN","bus","train","bicycle","boat"],
-["platicar","plah-tee-KAR","to chat","to argue","to sing","to write"]
+medium:[
+["ahorita","ah-oh-REE-tah","in a little while / right now, depending on context","yesterday","next week","never","Ahorita voy."],
+["mande","MAHN-deh","pardon? / yes, what is it?","go away","come here","I don't know","¿Mande? No escuché."],
+["chamba","CHAHM-bah","work / job (colloquial)","party","money","food","Tengo mucha chamba hoy."],
+["lana","LAH-nah","money (slang)","wool","clothes","luck","No traigo lana."],
+["órale","OH-rah-leh","wow / okay / let's go","sorry","goodbye","quiet","¡Órale! Vamos."],
+["provecho","proh-BEH-choh","enjoy your meal","good luck","good night","welcome home","¡Buen provecho!"],
+["¿cuánto cuesta?","KWAN-toh KWEHS-tah","how much does it cost?","where is the bathroom?","what time is it?","where are you from?","¿Cuánto cuesta esta camisa?"],
+["echar la mano","eh-CHAR lah MAH-noh","to give someone a hand","to shake hands","to wave goodbye","to lend money","¿Me echas la mano?"],
+["antojito","ahn-toh-HEE-toh","Mexican snack / small craving","dessert menu","spicy sauce","big meal","Se me antoja un antojito."],
+["sobremesa","soh-breh-MEH-sah","chatting together after a meal","a tablecloth","the first course","a late breakfast","Nos quedamos de sobremesa."],
+["cruda","KROO-dah","hangover","cold weather","raw meat","a difficult day","Tengo una cruda terrible."],
+["fresa","FREH-sah","posh / preppy person (slang)","strawberry only","very tired","very lucky","Ese lugar es muy fresa."],
+["neta","NEH-tah","the truth / for real (slang)","a small amount","a promise","a rumour","¿Neta? ¡No sabía!"],
+["chido","CHEE-doh","cool / great (slang)","expensive","boring","far away","Tu casa está muy chida."],
+["camión","kah-mee-OWN","bus in many parts of Mexico","train","bicycle","boat","Voy al centro en camión."],
+["platicar","plah-tee-KAR","to chat / talk","to argue","to sing","to write","Me gusta platicar contigo."],
+["queda cerca","KEH-dah SEHR-kah","it's nearby","it's closed","it's expensive","it's late","El restaurante queda cerca."],
+["¿me regala...?","meh reh-GAH-lah","could I have...? (polite request)","do you sell...?","where can I find...?","how much is...?","¿Me regala una botella de agua?"],
+["rato","RAH-toh","a while","a year","an exact minute","tomorrow","Espérame un rato."],
+["chamarra","chah-MAH-rrah","jacket","hat","shoes","shirt","Lleva tu chamarra, hace frío."],
+["refresco","reh-FREHS-koh","soft drink / soda","fresh fruit","coffee","soup","¿Quieres un refresco?"],
+["torta","TOR-tah","Mexican sandwich","cake only","taco","soup","Me comí una torta de jamón."],
+["chamaco","chah-MAH-koh","kid / young boy (colloquial)","grandfather","shopkeeper","teacher","Ese chamaco juega fútbol."],
+["aprovechar","ah-proh-veh-CHAR","to make the most of","to waste","to borrow","to forget","Hay que aprovechar el día."],
+["de una vez","deh OO-nah VEHS","right away / while we're at it","once a year","not yet","one by one","Paga todo de una vez."],
+["con permiso","kohn pehr-MEE-soh","excuse me (passing through)","you're welcome","good luck","see you later","Con permiso, voy a pasar."],
+["¡qué onda!","keh ON-dah","what's up?","what time is it?","where is it?","how much?","¡Qué onda! ¿Cómo andas?"],
+["aguacate","ah-gwah-KAH-teh","avocado","cucumber","lime","mango","Quiero aguacate con limón."],
+["propina","proh-PEE-nah","tip / gratuity","receipt","discount","change","¿La propina está incluida?"],
+["estacionamiento","ehs-tah-see-oh-nah-MYEHN-toh","parking lot","bus stop","gas station","airport","¿Dónde está el estacionamiento?"]
 ],
-pro: [
-["desmañanado","dehs-mahn-yah-NAH-doh","sleep-deprived from getting up early","someone who sleeps late","well dressed","in a hurry"],
-["apapachar","ah-pah-pah-CHAR","to pamper someone affectionately","to surprise","to tease","to congratulate"],
-["empalagar","ehm-pah-lah-GAR","to become overly sweet","to run out of food","to get sunburned","to feel sleepy"],
-["desvelado","dehs-veh-LAH-doh","short on sleep","well rested","confused","hungry"],
-["malinchista","mah-leen-CHEES-tah","someone who favours foreign things over local ones","spicy food lover","musician","market vendor"],
-["chambear","chahm-beh-AR","to work","to travel","to bargain","to cook"],
-["aguas","AH-gwahs","watch out","cheers","welcome","slow down"],
-["despapaye","dehs-pah-PAH-yeh","a mess or chaotic situation","celebration","delicious sauce","shortcut"],
-["güey","WEY","dude or buddy","boss","stranger","neighbour"],
-["equis","EH-kees","whatever or no big deal","excellent","dangerous","difficult"],
-["ni modo","nee MOH-doh","oh well","not at all","maybe later","of course"],
-["de volada","deh voh-LAH-dah","right away","quietly","without paying","once a week"],
-["a todo dar","ah TOH-doh DAR","excellent","expensive","broken","far away"],
-["me late","meh LAH-teh","I like the idea","my heart hurts","I am late","I remember"],
-["hacer el paro","ah-SEHR el PAH-roh","to do someone a favour","to stop working","to pay","to rest"]
-]
-};
-
-const $ = id => document.getElementById(id);
-let level = localStorage.getItem("spanishLevel") || "easy";
-let saved = JSON.parse(localStorage.getItem("spanishMemory") || "[]");
-let missed = JSON.parse(localStorage.getItem("spanishMissed") || "[]");
-let current, answered = false, mode = "new", pileMode = "memory";
-
-function save() {
-  localStorage.setItem("spanishMemory",JSON.stringify(saved));
-  localStorage.setItem("spanishMissed",JSON.stringify(missed));
-  localStorage.setItem("spanishLevel",level);
-}
-function shuffle(a) {
-  return [...a].sort(() => Math.random()-.5);
-}
-function key(w) { return level+"|"+w[0]; }
-
-function chooseWord() {
-  if(mode === "memory") {
-    let list = saved.filter(k => k.startsWith(level+"|"));
-    if(list.length) {
-      let name=list[Math.floor(Math.random()*list.length)].split("|")[1];
-      return words[level].find(w=>w[0]===name);
-    }
-  }
-  let pending=missed.filter(k=>k.startsWith(level+"|"));
-  if(pending.length) {
-    return words[level].find(w=>w[0]===pending[0].split("|")[1]);
-  }
-  let fresh=words[level].filter(w=>!saved.includes(key(w)) && !missed.includes(key(w)));
-  return fresh.length ? fresh[Math.floor(Math.random()*fresh.length)] : words[level][0];
-}
-
-function render() {
-  current=chooseWord();
-  answered=false;
-  $("word").textContent=current[0];
-  $("pronunciation").textContent="Pronunciation: "+current[1];
-  $("wordType").textContent=mode==="memory"?"MEMORY PRACTICE":"YOUR NEXT WORD";
-  $("feedback").innerHTML="";
-  $("next").hidden=true;
-  $("answers").innerHTML="";
-  shuffle(current.slice(2)).forEach(answer=>{
-    let b=document.createElement("button");
-    b.className="answer";
-    b.textContent=answer;
-    b.onclick=()=>check(b,answer);
-    $("answers").appendChild(b);
-  });
-  update();
-}
-
-function check(button,answer) {
-  if(answered)return;
-  answered=true;
-  let correct=answer===current[2];
-  let k=key(current);
-  document.querySelectorAll(".answer").forEach(b=>{
-    b.disabled=true;
-    if(b.textContent===current[2])b.classList.add("correct");
-  });
-  if(correct) {
-    if(!saved.includes(k))saved.push(k);
-    missed=missed.filter(x=>x!==k);
-    $("feedback").innerHTML='<div class="feedback">✓ Correct! '+current[0]+' means "'+current[2]+'". Saved to your memory pile.</div>';
-  } else {
-    button.classList.add("wrong");
-    saved=saved.filter(x=>x!==k);
-    if(!missed.includes(k))missed.push(k);
-    $("feedback").innerHTML='<div class="feedback bad">Not quite. '+current[0]+' means "'+current[2]+'". This word returns to your learning rotation.</div>';
-  }
-  save();
-  update();
-  showPile();
-  $("next").hidden=false;
-}
-
-function update() {
-  $("learned").textContent=saved.filter(k=>k.startsWith(level+"|")).length;
-  $("review").textContent=missed.filter(k=>k.startsWith(level+"|")).length;
-}
-function showPile() {
-  let list=pileMode==="memory"?saved:missed;
-  let filtered=list.filter(k=>k.startsWith(level+"|"));
-  $("pile").innerHTML=filtered.length ? filtered.map(k=>{
-    let w=words[level].find(x=>x[0]===k.split("|")[1]);
-    return '<div class="pile-item"><strong>'+w[0]+'</strong><span>'+w[2]+'</span></div>';
-  }).join("") : '<p class="muted">Your words will appear here.</p>';
-}
-document.querySelectorAll("[data-level]").forEach(b=>{
-  b.onclick=()=>{
-    level=b.dataset.level;
-    document.querySelectorAll("[data-level]").forEach(x=>x.classList.remove("active"));
-    b.classList.add("active");
-    mode="new";
-    save();render();showPile();
-  };
-});
-$("next").onclick=()=>{mode="new";render()};
-$("practiceMemory").onclick=()=>{mode="memory";render()};
-$("memoryTab").onclick=()=>{pileMode="memory";showPile()};
-$("rotationTab").onclick=()=>{pileMode="rotation";showPile()};
-render();showPile();
+pro:[
+["desmañanado","dehs-mahn-yah-NAH-doh","sleep-deprived from getting up early","someone who sleeps late","very well dressed","in a hurry","Ando desmañanado por el vuelo."],
+["apapachar","ah-pah-pah-CHAR","to pamper / show affectionate care","to surprise someone","to tease a friend","to congratulate","Mi abuela me apapachaba mucho."],
+["empalagar","ehm-pah-lah-GAR","to become overly sweet / cloying","to run out of food","to get sunburned","to feel sleepy","El pastel me llegó a empalagar."],
+["desvelado","dehs-veh-LAH-doh","short on sleep / kept awake","wide awake and rested","confused","very hungry","Estoy desvelado por la fiesta."],
+["malinchista","mah-leen-CHEES-tah","someone who favours foreign things over local ones","someone who loves spicy food","a traditional musician","a market vendor","No seas malinchista, apoya lo local."],
+["chambear","chahm-beh-AR","to work (colloquial)","to travel","to bargain","to cook","Mañana me toca chambear."],
+["aguas","AH-gwahs","watch out! / be careful!","cheers!","you're welcome","slow down","¡Aguas con el escalón!"],
+["despapaye","dehs-pah-PAH-yeh","mess / chaotic situation (colloquial)","a celebration","a delicious sauce","a shortcut","Se armó un despapaye en la calle."],
+["güey","WEY","dude / buddy (very informal)","boss","stranger","neighbour","¿Qué onda, güey?"],
+["equis","EH-kees","whatever / no big deal","excellent","dangerous","very difficult","Fue un día equis."],
+["ponerse las pilas","poh-NEHR-seh lahs PEE-lahs","to get moving / get focused","to go to sleep","to get dressed","to calm down","Hay que ponerse las pilas."],
+["dar el avión","dar el ah-vee-OWN","to humour someone / pretend to listen","to give someone a ride","to cancel plans","to tell the truth","Creo que me está dando el avión."],
+["ni modo","nee MOH-doh","oh well / there's nothing to be done","not at all","maybe later","of course","Ni modo, será para mañana."],
+["echar aguas","eh-CHAR AH-gwahs","to keep watch / look out","to pour water","to go swimming","to wash dishes","Échame aguas mientras estaciono."],
+["de volada","deh voh-LAH-dah","right away / very quickly","very quietly","without paying","once a week","Regreso de volada."],
+["a todo dar","ah TOH-doh DAR","excellent / really great","very expensive","completely broken","far away","La fiesta estuvo a todo dar."],
+["sacar de onda","sah-KAR deh ON-dah","to surprise or unsettle someone","to cheer someone up","to invite someone out","to make someone laugh","Su comentario me sacó de onda."],
+["me late","meh LAH-teh","I have a feeling / I like the idea","my heart hurts","I am running late","I remember","Me late ir a la playa."],
+["hacer el paro","ah-SEHR el PAH-roh","to do someone a favour","to stop working","to make a payment","to take a break","¿Me haces el paro con esto?"],
+["estar cañón","ehs-TAR kah-NYON","to be tough / intense","to be delicious","to be nearby","to be simple","El tráfico está cañón."],
+["echar relajo","eh-CHAR reh-LAH-hoh","to joke around / fool around","to clean the house","to go shopping","to work overtime","Nos gusta echar relajo."],
+["dar lata","dar LAH-tah","to bother / be a nuisance","to give a present","to make a phone call","to take a nap","Ese ruido me da lata."],
+["estar hecho bolas","ehs-TAR EH-choh BOH-lahs","to be confused","to be very happy","to be exhausted","to be in a hurry","Estoy hecho bolas con las instrucciones."],
+["echar una cascarita","eh-CHAR OO-nah kahs-kah-REE-tah","to play an informal soccer game","to cook outside","to go for a run","to watch a movie","Vamos a echar una cascarita."],
+["no tener pelos en la lengua","noh teh-NEHR PEH-lohs en lah LEHN-gwah","to speak bluntly","to be shy","to be very hungry","to be a good singer","Mi tía no tiene pelos en la lengua."],
+["¡qué padre!","keh PAH-dreh","how cool! / that's great!","how expensive!","how strange!","how late!","¡Qué padre está tu jardín!"],
+["¡no manches!","noh MAHN-chehs","no way! / you're kidding!","don't touch it","please sit down","hurry up","¡No manches! ¿En serio?"],
+["estar en la luna","ehs-TAR en lah LOO-nah","to have your head in the clouds","to be on holiday","to be very angry","to be lost","Hoy andas en la luna."],
+["echar un ojo","eh-CHAR oon OH-hoh","to keep an eye on something","to close your eyes","to look away","to take a photo","Échale un ojo a mi mochila."],
+["quedarse de piedra","keh-DAR-seh deh PYEH-drah","to be stunned / speechless","to get cold","to fall asleep","to be bored","Me quedé de piedra al escucharlo."]
+]};
+const SCENARIOS=[
+{cat:"Restaurant",scene:"You are at a restaurant in Mexico. The server asks what you would like to drink.",q:"How do you say, “A bottle of water, please”?",a:["Una botella de agua, por favor.","Una casa de agua, gracias.","Quiero la cuenta, por favor.","¿Dónde está el baño?"],right:0,why:"Una botella de agua, por favor. is a polite way to order a bottle of water."},
+{cat:"Market",scene:"You are shopping at a market and want to know the price.",q:"What do you ask?",a:["¿Qué hora es?","¿Cuánto cuesta?","¿Dónde vives?","¿Cómo te llamas?"],right:1,why:"¿Cuánto cuesta? means How much does it cost?"},
+{cat:"Taxi",scene:"You are in a taxi and want to go to the beach.",q:"What do you say?",a:["Quiero ir a la playa, por favor.","Quiero comer la playa.","Estoy en la playa ayer.","La playa cuesta mucho."],right:0,why:"Quiero ir a la playa, por favor. means I want to go to the beach, please."},
+{cat:"Directions",scene:"You need to find the bathroom.",q:"Which question should you ask?",a:["¿Dónde está el baño?","¿Cuánto cuesta el baño?","¿Qué comes?","¿A qué hora sales?"],right:0,why:"¿Dónde está el baño? means Where is the bathroom?"},
+{cat:"Grocery store",scene:"You want half a kilo of avocados.",q:"Which phrase helps you ask for them?",a:["Medio kilo de aguacates, por favor.","Un vaso de aguacate.","La cuenta de aguacates.","¿Dónde está mi taxi?"],right:0,why:"Medio kilo de aguacates, por favor. means Half a kilo of avocados, please."},
+{cat:"Café",scene:"The barista asks if you want your coffee with milk.",q:"How do you answer, “Yes, with milk, please”?",a:["Sí, con leche, por favor.","No tengo casa.","Está muy lejos.","Hasta mañana."],right:0,why:"Sí, con leche, por favor. means Yes, with milk, please."},
+{cat:"Neighbour",scene:"You meet a neighbour in the morning.",q:"What is a friendly greeting?",a:["¡Buenos días! ¿Cómo está?","¿Cuánto cuesta?","La cuenta, por favor.","No manches."],right:0,why:"¡Buenos días! ¿Cómo está? is a polite morning greeting."},
+{cat:"Paying",scene:"You have finished eating and want the bill.",q:"What do you ask?",a:["La cuenta, por favor.","Un boleto, por favor.","Una chamarra, por favor.","Estoy desvelado."],right:0,why:"La cuenta, por favor. means The bill, please."}
+];
+const DIALOGUES=[
+{lines:["Local: ¡Hola! ¿Qué tal?","You: ..."],q:"What is a natural reply?",a:["¡Muy bien, gracias! ¿Y tú?","Cuesta veinte pesos.","A la izquierda.","No tengo hambre."],r:0,why:"¡Muy bien, gracias! ¿Y tú? means Very well, thanks! And you?"},
+{lines:["Server: ¿Qué te gustaría tomar?","You: ..."],q:"What do you say if you want a coffee?",a:["Un café, por favor.","La playa está cerca.","Estoy de acuerdo.","Hasta luego."],r:0,why:"Un café, por favor. means A coffee, please."},
+{lines:["Shopkeeper: ¿Algo más?","You: ..."],q:"How do you say “No, that's all, thank you”?",a:["No, nada más, gracias.","Sí, mañana temprano.","Está a la derecha.","Mucho gusto."],r:0,why:"No, nada más, gracias. means No, nothing else, thank you."},
+{lines:["Neighbour: ¿De dónde eres?","You: ..."],q:"How do you say you are from Canada?",a:["Soy de Canadá.","Tengo Canadá.","Voy Canadá ayer.","Me llamo Canadá."],r:0,why:"Soy de Canadá means I am from Canada."},
+{lines:["Friend: ¿Quieres ir a la playa?","You: ..."],q:"How do you say “Yes, sounds good”?",a:["Sí, me parece bien.","No sé dónde está.","La cuenta, por favor.","Tengo una chamarra."],r:0,why:"Sí, me parece bien. means Yes, sounds good to me."},
+{lines:["Local: ¿Necesitas ayuda?","You: ..."],q:"How do you politely say “Yes, please”?",a:["Sí, por favor.","No cuesta nada.","Hasta mañana.","Estoy en casa."],r:0,why:"Sí, por favor. means Yes, please."}
+];
+const $=id=>document.getElementById(id),dayKey=()=>{let d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")};
+let S=(()=>{let raw=localStorage.getItem("pdd-final");if(raw)return JSON.parse(raw);let mem=JSON.parse(localStorage.getItem("pdd-v3")||"null");if(mem)return mem;return {memory:JSON.parse(localStorage.getItem("spanishMemory")||"[]"),rotation:JSON.parse(localStorage.getItem("spanishMissed")||"[]"),correct:0,attempts:0,done:{},streak:0,last:"",scenarioDone:0,dialogueDone:0,flashKnown:0}})();
+S.memory=S.memory||[];S.rotation=S.rotation||[];S.correct=S.correct||0;S.attempts=S.attempts||0;S.done=S.done||{};S.streak=S.streak||0;S.last=S.last||"";
+let level=localStorage.getItem("pdd-final-level")||localStorage.getItem("pdd-level-v3")||"easy",current=null,answered=false,mode="new",pileMode="memory",scenarioIndex=0,dialogueIndex=0,flashWord=null,listenWord=null,speakWord=null,recognition=null;
+function save(){localStorage.setItem("pdd-final",JSON.stringify(S));localStorage.setItem("pdd-final-level",level)}
+function key(w){return level+"|"+w[0]}
+function shuffle(a){return [...a].sort(()=>Math.random()-.5)}
+function pool(){return WORDS[level]}
+function dailyWord(){let n=Math.floor(new Date(dayKey()+"T12:00:00").getTime()/86400000);return pool()[n%pool().length]}
+function pickWord(){if(mode==="memory"){let a=S.memory.filter(k=>k.startsWith(level+"|"));if(a.length){let n=a[Math.floor(Math.random()*a.length)].split("|")[1];return {w:pool().find(x=>x[0]===n),type:"memory"}}mode="new"}
+let pending=S.rotation.filter(k=>k.startsWith(level+"|"));if(pending.length){let n=pending[0].split("|")[1];return {w:pool().find(x=>x[0]===n),type:"review"}}
+let d=dailyWord();if(!S.done[level+"|"+dayKey()]&&!S.memory.includes(key(d)))return {w:d,type:"daily"};
+let fresh=pool().filter(w=>!S.memory.includes(key(w))&&!S.rotation.includes(key(w)));return fresh.length?{w:fresh[Math.floor(Math.random()*fresh.length)],type:"new"}:{w:d,type:"review"}}
+function setScreen(name){document.querySelectorAll(".screen").forEach(x=>x.classList.add("hidden"));$("screen-"+name).classList.remove("hidden");document.querySelectorAll("[data-screen]").forEach(b=>b.classList.toggle("active",b.dataset.screen===name));if(name==="badges")renderBadges();if(name==="saved")showPile();if(name==="progress")updateProgress()}
+function renderDaily(){let p=pickWord();current=p.w;answered=false;$("wordKind").textContent=p.type==="daily"?"TODAY'S WORD":p.type==="review"?"REVIEW WORD":p.type==="memory"?"MEMORY PRACTICE":"NEXT WORD";$("wordMode").textContent=p.type==="review"?"Back in rotation":p.type==="memory"?"Saved word":p.type==="daily"?"Daily challenge":"Keep learning";$("word").textContent=current[0];$("pron").textContent="Pronunciation: "+current[1];$("example").textContent="Example: "+current[6];$("feedback").innerHTML="";$("nextWord").hidden=true;$("answers").innerHTML="";shuffle(current.slice(2,6)).forEach(a=>{let b=document.createElement("button");b.className="answer";b.textContent=a;b.onclick=()=>checkDaily(b,a);$("answers").appendChild(b)});updateProgress()}
+function playCelebration(){if(!$("soundToggle").checked)return;let AC=window.AudioContext||window.webkitAudioContext;if(!AC)return;let c=new AC(),notes=[523.25,659.25,783.99,1046.5];notes.forEach((f,i)=>{let o=c.createOscillator(),g=c.createGain(),t=c.currentTime+i*.13;o.type="sine";o.frequency.value=f;g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.16,t+.025);g.gain.exponentialRampToValueAtTime(.0001,t+.23);o.connect(g);g.connect(c.destination);o.start(t);o.stop(t+.24)});setTimeout(()=>c.close(),1000)}
+function celebrate(){playCelebration();$("party").classList.add("show");setTimeout(()=>$("party").classList.remove("show"),1900)}
+function updateStreak(){if(S.last===dayKey())return;let d=new Date();d.setDate(d.getDate()-1);let y=d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");S.streak=S.last===y?S.streak+1:1;S.last=dayKey()}
+function checkDaily(btn,a){if(answered)return;answered=true;S.attempts++;let ok=a===current[2],k=key(current);document.querySelectorAll("#answers .answer").forEach(b=>{b.disabled=true;if(b.textContent===current[2])b.classList.add("correct")});if(ok){S.correct++;if(!S.memory.includes(k))S.memory.push(k);S.rotation=S.rotation.filter(x=>x!==k);S.done[level+"|"+dayKey()]=true;updateStreak();$("feedback").innerHTML='<div class="feedback">✓ ¡Correcto! <b>'+current[0]+'</b> means “'+current[2]+'”. Added to your Memory Pile.</div>';if(S.correct%10===0)setTimeout(celebrate,250)}else{btn.classList.add("wrong");S.memory=S.memory.filter(x=>x!==k);if(!S.rotation.includes(k))S.rotation.push(k);$("feedback").innerHTML='<div class="feedback bad">Not quite. <b>'+current[0]+'</b> means “'+current[2]+'”. Example: '+current[6]+' This word returns to your Learning Rotation.</div>'}save();updateProgress();showPile();$("nextWord").hidden=false}
+function updateProgress(){let learned=S.memory.filter(k=>k.startsWith(level+"|")).length,review=S.rotation.filter(k=>k.startsWith(level+"|")).length,n=S.correct%10;$("totalCorrect").textContent=S.correct;$("learnedCount").textContent=learned;$("reviewCount").textContent=review;$("streakCount").textContent=S.streak;$("sessions").textContent=S.attempts;$("accuracy").textContent=S.attempts?Math.round(S.correct/S.attempts*100)+"%":"0%";$("milestone").textContent=n+" / 10";$("progressBar").style.width=n*10+"%";$("rewardText").textContent="Next milestone: "+(10-n)+" more correct answer"+(10-n===1?"":"s")+". Streak rewards: 7 days, 14 days and 30 days.";$("levelName").textContent=level[0].toUpperCase()+level.slice(1);document.querySelectorAll("[data-level]").forEach(b=>b.classList.toggle("active",b.dataset.level===level))}
+function showPile(){let arr=(pileMode==="memory"?S.memory:S.rotation).filter(k=>k.startsWith(level+"|"));$("pileList").innerHTML=arr.length?arr.map(k=>{let w=pool().find(x=>x[0]===k.split("|")[1]);return '<div class="pile"><strong>'+w[0]+'</strong><span>'+w[2]+'</span></div>'}).join(""):'<p class="small">'+(pileMode==="memory"?"Correct answers will be saved here.":"Missed words return here for another round.")+'</p>';$("memoryTab").classList.toggle("active",pileMode==="memory");$("rotationTab").classList.toggle("active",pileMode==="rotation")}
+function badgeData(){let count=S.memory.length,st=S.streak,correct=S.correct;return [{e:"🌱",n:"First steps",d:"Learn your first word",ok:count>=1},{e:"📚",n:"Word collector",d:"Learn 25 words",ok:count>=25},{e:"🧠",n:"Vocabulary builder",d:"Learn 50 words",ok:count>=50},{e:"🏅",n:"Word master",d:"Learn 100 words",ok:count>=100},{e:"🔥",n:"One-week streak",d:"Practise 7 days in a row",ok:st>=7},{e:"🌟",n:"Two-week streak",d:"Practise 14 days in a row",ok:st>=14},{e:"👑",n:"Monthly dedication",d:"Practise 30 days in a row",ok:st>=30},{e:"🎉",n:"Ten correct",d:"Answer 10 questions correctly",ok:correct>=10},{e:"💯",n:"Century club",d:"Answer 100 questions correctly",ok:correct>=100},{e:"🗣️",n:"Conversation starter",d:"Complete 5 conversation questions",ok:(S.dialogueDone||0)>=5}]}
+function renderBadges(){$("badgeGrid").innerHTML=badgeData().map(b=>'<div class="badge-card '+(b.ok?"":"locked")+'"><div class="emoji">'+b.e+'</div><b>'+b.n+'</b><span>'+b.d+'</span><div class="small">'+(b.ok?"Unlocked":"Locked")+'</div></div>').join("")}
+function setupScenario(){let sel=$("scenarioPick");sel.innerHTML=SCENARIOS.map((s,i)=>'<option value="'+i+'">'+s.cat+'</option>').join("");sel.onchange=()=>{scenarioIndex=+sel.value;renderScenario()};renderScenario()}
+function renderScenario(){let s=SCENARIOS[scenarioIndex];$("scenarioText").innerHTML="<strong>Situation:</strong> "+s.scene;$("scenarioQuestion").textContent=s.q;$("scenarioFeedback").innerHTML="";$("scenarioNext").hidden=true;$("scenarioAnswers").innerHTML="";s.a.forEach((a,i)=>{let b=document.createElement("button");b.className="answer";b.textContent=a;b.onclick=()=>{if(b.disabled)return;S.attempts++;let ok=i===s.right;[...$("scenarioAnswers").children].forEach(x=>x.disabled=true);$("scenarioAnswers").children[s.right].classList.add("correct");if(ok){S.correct++;S.scenarioDone=(S.scenarioDone||0)+1;updateStreak();$("scenarioFeedback").innerHTML='<div class="feedback">✓ Correct. '+s.why+'</div>';if(S.correct%10===0)setTimeout(celebrate,250)}else{b.classList.add("wrong");$("scenarioFeedback").innerHTML='<div class="feedback bad">'+s.why+'</div>'}save();updateProgress();$("scenarioNext").hidden=false};$("scenarioAnswers").appendChild(b)})}
+function renderDialogue(){let d=DIALOGUES[dialogueIndex];$("dialogue").innerHTML=d.lines.map(x=>"<div>"+x+"</div>").join("");$("dialogueQuestion").textContent=d.q;$("dialogueFeedback").innerHTML="";$("dialogueNext").hidden=true;$("dialogueAnswers").innerHTML="";d.a.forEach((a,i)=>{let b=document.createElement("button");b.className="answer";b.textContent=a;b.onclick=()=>{if(b.disabled)return;S.attempts++;let ok=i===d.r;[...$("dialogueAnswers").children].forEach(x=>x.disabled=true);$("dialogueAnswers").children[d.r].classList.add("correct");if(ok){S.correct++;S.dialogueDone=(S.dialogueDone||0)+1;updateStreak();$("dialogueFeedback").innerHTML='<div class="feedback">✓ '+d.why+'</div>';if(S.correct%10===0)setTimeout(celebrate,250)}else{b.classList.add("wrong");$("dialogueFeedback").innerHTML='<div class="feedback bad">'+d.why+'</div>'}save();updateProgress();$("dialogueNext").hidden=false};$("dialogueAnswers").appendChild(b)})}
+function chooseRandomWord(){return pool()[Math.floor(Math.random()*pool().length)]}
+function renderFlash(){flashWord=chooseRandomWord();$("flashWord").textContent=flashWord[0];$("flashPron").textContent="Pronunciation: "+flashWord[1];$("flashAnswer").hidden=true;$("flashExample").hidden=true;$("flashAnswer").textContent=flashWord[2];$("flashExample").textContent=flashWord[6];$("revealFlash").hidden=false;$("flashStatus").textContent="";$("flashAgain").disabled=true;$("flashKnow").disabled=true}
+function renderListen(){listenWord=chooseRandomWord();$("listenFeedback").innerHTML="";$("listenNext").hidden=true;$("listenAnswers").innerHTML="";shuffle(listenWord.slice(2,6)).forEach(a=>{let b=document.createElement("button");b.className="answer";b.textContent=a;b.onclick=()=>{if(b.disabled)return;S.attempts++;let ok=a===listenWord[2];[...$("listenAnswers").children].forEach(x=>x.disabled=true);[...$("listenAnswers").children].find(x=>x.textContent===listenWord[2]).classList.add("correct");if(ok){S.correct++;updateStreak();$("listenFeedback").innerHTML='<div class="feedback">✓ Correct. '+listenWord[0]+' means “'+listenWord[2]+'”.';if(S.correct%10===0)setTimeout(celebrate,250)}else{b.classList.add("wrong");$("listenFeedback").innerHTML='<div class="feedback bad">'+listenWord[0]+' means “'+listenWord[2]+'”.'}$("listenFeedback").innerHTML+="<br>Example: "+listenWord[6]+"</div>";save();updateProgress();$("listenNext").hidden=false};$("listenAnswers").appendChild(b)})}
+function speakSpanish(text){if(!("speechSynthesis" in window)){alert("Speech playback is not supported in this browser.");return}window.speechSynthesis.cancel();let u=new SpeechSynthesisUtterance(text);u.lang="es-MX";u.rate=.82;window.speechSynthesis.speak(u)}
+function renderSpeak(){speakWord=chooseRandomWord();$("speakWord").textContent=speakWord[0];$("speakPron").textContent="Pronunciation guide: "+speakWord[1];$("speakMeaning").textContent="Meaning: "+speakWord[2];$("speechResult").textContent="Tap the microphone and say the Spanish word."}
+function startSpeech(){let SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR){$("speechResult").textContent="Speech recognition is not available in this browser. Try opening the site in Safari or Chrome and allow microphone access.";return}try{recognition=new SR();recognition.lang="es-MX";recognition.interimResults=false;recognition.maxAlternatives=3;$("startSpeech").disabled=true;$("speechResult").textContent="Listening... Say: "+speakWord[0];recognition.onresult=e=>{let heard=e.results[0][0].transcript;let norm=x=>x.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[¿?¡!.,]/g,"").trim();let match=norm(heard)===norm(speakWord[0]);$("speechResult").textContent='I heard: "'+heard+'". '+(match?"Good match! ¡Muy bien!":"Not an exact match. Try again slowly. Target: "+speakWord[0]);if(match){S.speechWins=(S.speechWins||0)+1;save()}};recognition.onerror=e=>{$("speechResult").textContent="Speech recognition issue: "+e.error+". Check microphone permission and try again."};recognition.onend=()=>$("startSpeech").disabled=false;recognition.start()}catch(e){$("startSpeech").disabled=false;$("speechResult").textContent="Could not start the microphone. Check browser permissions."}}
+document.querySelectorAll("[data-level]").forEach(b=>b.onclick=()=>{level=b.dataset.level;mode="new";save();renderDaily();renderFlash();renderListen();renderSpeak();updateProgress()});
+document.querySelectorAll("[data-screen]").forEach(b=>b.onclick=()=>{setScreen(b.dataset.screen);if(b.dataset.screen==="daily")renderDaily();if(b.dataset.screen==="real")renderScenario();if(b.dataset.screen==="talk")renderDialogue();if(b.dataset.screen==="flash")renderFlash();if(b.dataset.screen==="listen")renderListen();if(b.dataset.screen==="speak")renderSpeak()});
+$("nextWord").onclick=()=>{mode="new";renderDaily()};$("memoryTab").onclick=()=>{pileMode="memory";showPile()};$("rotationTab").onclick=()=>{pileMode="rotation";showPile()};$("practiceMemory").onclick=()=>{mode="memory";setScreen("daily");renderDaily()};
+$("scenarioNext").onclick=()=>{scenarioIndex=(scenarioIndex+1)%SCENARIOS.length;$("scenarioPick").value=scenarioIndex;renderScenario()};
+$("dialogueNext").onclick=()=>{dialogueIndex=(dialogueIndex+1)%DIALOGUES.length;renderDialogue()};
+$("revealFlash").onclick=()=>{$("flashAnswer").hidden=false;$("flashExample").hidden=false;$("revealFlash").hidden=true;$("flashAgain").disabled=false;$("flashKnow").disabled=false};
+$("flashAgain").onclick=()=>{let k=key(flashWord);if(!S.rotation.includes(k))S.rotation.push(k);$("flashStatus").textContent="Added to your review rotation.";save();updateProgress();renderFlash()};
+$("flashKnow").onclick=()=>{let k=key(flashWord);if(!S.memory.includes(k))S.memory.push(k);S.rotation=S.rotation.filter(x=>x!==k);S.flashKnown=(S.flashKnown||0)+1;$("flashStatus").textContent="Saved to your memory pile. ¡Bien hecho!";save();updateProgress();renderFlash()};
+$("playWord").onclick=()=>speakSpanish(listenWord[0]);$("listenNext").onclick=renderListen;$("startSpeech").onclick=startSpeech;$("newSpeak").onclick=renderSpeak;
+setupScenario();renderDaily();renderFlash();renderListen();renderSpeak();updateProgress();showPile();
 </script>
-</body>
-</html>
+</body></html>
