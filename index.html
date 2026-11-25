@@ -1,0 +1,313 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Palabra del Día</title>
+<style>
+:root {
+  --green:#164b40;
+  --cream:#f7f3e9;
+  --paper:#fffdf8;
+  --ink:#1d2925;
+  --muted:#68736d;
+}
+* { box-sizing:border-box; }
+body {
+  margin:0;
+  background:var(--cream);
+  color:var(--ink);
+  font-family:system-ui,sans-serif;
+}
+header {
+  background:var(--green);
+  color:white;
+  text-align:center;
+  padding:30px 15px;
+}
+header h1 { margin:8px 0; font-size:32px; }
+header p { margin:0; color:#d5e7df; }
+main { max-width:650px; margin:auto; padding:18px; }
+.panel {
+  background:var(--paper);
+  border-radius:18px;
+  padding:20px;
+  margin-bottom:15px;
+  box-shadow:0 5px 20px #00000010;
+}
+.levels,.stats,.tabs {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:9px;
+}
+button {
+  cursor:pointer;
+  border:1px solid #ddd;
+  border-radius:11px;
+  padding:13px;
+  background:white;
+  color:var(--ink);
+  font-size:15px;
+  font-weight:650;
+}
+button.active,.primary {
+  background:var(--green);
+  color:white;
+  border-color:var(--green);
+}
+.word {
+  font-size:42px;
+  font-weight:800;
+  color:var(--green);
+  margin:20px 0 3px;
+}
+.muted { color:var(--muted); font-size:14px; }
+.question { font-size:18px; font-weight:700; margin:22px 0 12px; }
+.answers { display:grid; gap:9px; }
+.answer { text-align:left; width:100%; }
+.answer.correct { background:#e3f3e9; border-color:green; }
+.answer.wrong { background:#ffe9e5; border-color:#b44; }
+.feedback {
+  padding:14px;
+  border-radius:12px;
+  margin-top:12px;
+  background:#e3f3e9;
+  line-height:1.5;
+}
+.bad { background:#ffe9e5; }
+.primary { width:100%; margin-top:14px; }
+.stat {
+  background:#f1eee5;
+  padding:14px;
+  border-radius:12px;
+}
+.stat strong { display:block; font-size:25px; color:var(--green); }
+.tabs { grid-template-columns:1fr 1fr; }
+.pile-item {
+  display:flex;
+  justify-content:space-between;
+  padding:12px 0;
+  border-bottom:1px solid #eee;
+  gap:10px;
+}
+footer {
+  text-align:center;
+  padding:20px;
+  color:var(--muted);
+  font-size:12px;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div style="font-size:27px">🇲🇽</div>
+  <h1>Palabra del Día</h1>
+  <p>Learn Mexican Spanish one word at a time.</p>
+</header>
+
+<main>
+<section class="panel">
+  <strong>Choose your level</strong>
+  <div class="levels" style="margin-top:12px">
+    <button class="active" data-level="easy">Easy</button>
+    <button data-level="medium">Medium</button>
+    <button data-level="pro">Pro</button>
+  </div>
+</section>
+
+<section class="panel">
+  <div class="muted" id="wordType">TODAY'S WORD</div>
+  <div class="word" id="word">Hola</div>
+  <div class="muted" id="pronunciation">OH-lah</div>
+  <div class="question">What does this Spanish word mean?</div>
+  <div class="answers" id="answers"></div>
+  <div id="feedback" aria-live="polite"></div>
+  <button class="primary" id="next" hidden>Next word</button>
+</section>
+
+<section class="panel">
+  <strong>Your progress</strong>
+  <div class="stats" style="margin-top:12px;grid-template-columns:1fr 1fr">
+    <div class="stat"><strong id="learned">0</strong><span>Memory pile</span></div>
+    <div class="stat"><strong id="review">0</strong><span>To practise</span></div>
+  </div>
+</section>
+
+<section class="panel">
+  <div class="tabs">
+    <button class="active" id="memoryTab">Memory pile</button>
+    <button id="rotationTab">Learning rotation</button>
+  </div>
+  <div id="pile" style="margin-top:12px"></div>
+  <button class="primary" id="practiceMemory">Practise memory pile</button>
+</section>
+</main>
+
+<footer>Made for everyday Spanish in Mexico 🇲🇽</footer>
+
+<script>
+const words = {
+easy: [
+["hola","OH-lah","hello","goodbye","please","thank you"],
+["gracias","GRAH-see-ahs","thank you","hello","goodbye","please"],
+["agua","AH-gwah","water","milk","coffee","bread"],
+["comida","koh-MEE-dah","food","house","street","friend"],
+["casa","KAH-sah","house","car","store","school"],
+["perro","PEH-rroh","dog","cat","bird","horse"],
+["gato","GAH-toh","cat","dog","fish","rabbit"],
+["amigo","ah-MEE-goh","friend","brother","teacher","neighbour"],
+["por favor","por fah-VOR","please","thank you","goodbye","welcome"],
+["buenos días","BWEH-nohs DEE-ahs","good morning","good night","good afternoon","goodbye"],
+["baño","BAH-nyoh","bathroom","kitchen","bedroom","garden"],
+["calle","KAH-yeh","street","beach","market","mountain"],
+["dinero","dee-NEH-roh","money","time","food","ticket"],
+["calor","kah-LOR","heat","cold","rain","wind"],
+["frío","FREE-oh","cold","hot","warm","dry"],
+["desayuno","deh-sah-YOO-noh","breakfast","lunch","dinner","snack"],
+["playa","PLAH-yah","beach","pool","lake","island"],
+["mercado","mehr-KAH-doh","market","airport","restaurant","hotel"]
+],
+medium: [
+["ahorita","ah-oh-REE-tah","in a little while or right now","yesterday","next week","never"],
+["mande","MAHN-deh","pardon?","go away","come here","I don't know"],
+["chamba","CHAHM-bah","work or job","party","money","food"],
+["lana","LAH-nah","money","wool","clothes","luck"],
+["órale","OH-rah-leh","wow or okay","sorry","goodbye","quiet"],
+["provecho","proh-BEH-choh","enjoy your meal","good luck","good night","welcome"],
+["¿cuánto cuesta?","KWAN-toh KWEHS-tah","how much does it cost?","where is the bathroom?","what time is it?","where are you from?"],
+["echar la mano","eh-CHAR lah MAH-noh","to give someone a hand","to shake hands","to wave","to lend money"],
+["antojito","ahn-toh-HEE-toh","Mexican snack","dessert menu","spicy sauce","big meal"],
+["sobremesa","soh-breh-MEH-sah","chatting after a meal","a tablecloth","first course","breakfast"],
+["cruda","KROO-dah","hangover","cold weather","raw meat","difficult day"],
+["fresa","FREH-sah","posh or preppy person","strawberry","tired","lucky"],
+["neta","NEH-tah","the truth","a small amount","a promise","a rumour"],
+["chido","CHEE-doh","cool or great","expensive","boring","far away"],
+["camión","kah-mee-OWN","bus","train","bicycle","boat"],
+["platicar","plah-tee-KAR","to chat","to argue","to sing","to write"]
+],
+pro: [
+["desmañanado","dehs-mahn-yah-NAH-doh","sleep-deprived from getting up early","someone who sleeps late","well dressed","in a hurry"],
+["apapachar","ah-pah-pah-CHAR","to pamper someone affectionately","to surprise","to tease","to congratulate"],
+["empalagar","ehm-pah-lah-GAR","to become overly sweet","to run out of food","to get sunburned","to feel sleepy"],
+["desvelado","dehs-veh-LAH-doh","short on sleep","well rested","confused","hungry"],
+["malinchista","mah-leen-CHEES-tah","someone who favours foreign things over local ones","spicy food lover","musician","market vendor"],
+["chambear","chahm-beh-AR","to work","to travel","to bargain","to cook"],
+["aguas","AH-gwahs","watch out","cheers","welcome","slow down"],
+["despapaye","dehs-pah-PAH-yeh","a mess or chaotic situation","celebration","delicious sauce","shortcut"],
+["güey","WEY","dude or buddy","boss","stranger","neighbour"],
+["equis","EH-kees","whatever or no big deal","excellent","dangerous","difficult"],
+["ni modo","nee MOH-doh","oh well","not at all","maybe later","of course"],
+["de volada","deh voh-LAH-dah","right away","quietly","without paying","once a week"],
+["a todo dar","ah TOH-doh DAR","excellent","expensive","broken","far away"],
+["me late","meh LAH-teh","I like the idea","my heart hurts","I am late","I remember"],
+["hacer el paro","ah-SEHR el PAH-roh","to do someone a favour","to stop working","to pay","to rest"]
+]
+};
+
+const $ = id => document.getElementById(id);
+let level = localStorage.getItem("spanishLevel") || "easy";
+let saved = JSON.parse(localStorage.getItem("spanishMemory") || "[]");
+let missed = JSON.parse(localStorage.getItem("spanishMissed") || "[]");
+let current, answered = false, mode = "new", pileMode = "memory";
+
+function save() {
+  localStorage.setItem("spanishMemory",JSON.stringify(saved));
+  localStorage.setItem("spanishMissed",JSON.stringify(missed));
+  localStorage.setItem("spanishLevel",level);
+}
+function shuffle(a) {
+  return [...a].sort(() => Math.random()-.5);
+}
+function key(w) { return level+"|"+w[0]; }
+
+function chooseWord() {
+  if(mode === "memory") {
+    let list = saved.filter(k => k.startsWith(level+"|"));
+    if(list.length) {
+      let name=list[Math.floor(Math.random()*list.length)].split("|")[1];
+      return words[level].find(w=>w[0]===name);
+    }
+  }
+  let pending=missed.filter(k=>k.startsWith(level+"|"));
+  if(pending.length) {
+    return words[level].find(w=>w[0]===pending[0].split("|")[1]);
+  }
+  let fresh=words[level].filter(w=>!saved.includes(key(w)) && !missed.includes(key(w)));
+  return fresh.length ? fresh[Math.floor(Math.random()*fresh.length)] : words[level][0];
+}
+
+function render() {
+  current=chooseWord();
+  answered=false;
+  $("word").textContent=current[0];
+  $("pronunciation").textContent="Pronunciation: "+current[1];
+  $("wordType").textContent=mode==="memory"?"MEMORY PRACTICE":"YOUR NEXT WORD";
+  $("feedback").innerHTML="";
+  $("next").hidden=true;
+  $("answers").innerHTML="";
+  shuffle(current.slice(2)).forEach(answer=>{
+    let b=document.createElement("button");
+    b.className="answer";
+    b.textContent=answer;
+    b.onclick=()=>check(b,answer);
+    $("answers").appendChild(b);
+  });
+  update();
+}
+
+function check(button,answer) {
+  if(answered)return;
+  answered=true;
+  let correct=answer===current[2];
+  let k=key(current);
+  document.querySelectorAll(".answer").forEach(b=>{
+    b.disabled=true;
+    if(b.textContent===current[2])b.classList.add("correct");
+  });
+  if(correct) {
+    if(!saved.includes(k))saved.push(k);
+    missed=missed.filter(x=>x!==k);
+    $("feedback").innerHTML='<div class="feedback">✓ Correct! '+current[0]+' means "'+current[2]+'". Saved to your memory pile.</div>';
+  } else {
+    button.classList.add("wrong");
+    saved=saved.filter(x=>x!==k);
+    if(!missed.includes(k))missed.push(k);
+    $("feedback").innerHTML='<div class="feedback bad">Not quite. '+current[0]+' means "'+current[2]+'". This word returns to your learning rotation.</div>';
+  }
+  save();
+  update();
+  showPile();
+  $("next").hidden=false;
+}
+
+function update() {
+  $("learned").textContent=saved.filter(k=>k.startsWith(level+"|")).length;
+  $("review").textContent=missed.filter(k=>k.startsWith(level+"|")).length;
+}
+function showPile() {
+  let list=pileMode==="memory"?saved:missed;
+  let filtered=list.filter(k=>k.startsWith(level+"|"));
+  $("pile").innerHTML=filtered.length ? filtered.map(k=>{
+    let w=words[level].find(x=>x[0]===k.split("|")[1]);
+    return '<div class="pile-item"><strong>'+w[0]+'</strong><span>'+w[2]+'</span></div>';
+  }).join("") : '<p class="muted">Your words will appear here.</p>';
+}
+document.querySelectorAll("[data-level]").forEach(b=>{
+  b.onclick=()=>{
+    level=b.dataset.level;
+    document.querySelectorAll("[data-level]").forEach(x=>x.classList.remove("active"));
+    b.classList.add("active");
+    mode="new";
+    save();render();showPile();
+  };
+});
+$("next").onclick=()=>{mode="new";render()};
+$("practiceMemory").onclick=()=>{mode="memory";render()};
+$("memoryTab").onclick=()=>{pileMode="memory";showPile()};
+$("rotationTab").onclick=()=>{pileMode="rotation";showPile()};
+render();showPile();
+</script>
+</body>
+</html>
